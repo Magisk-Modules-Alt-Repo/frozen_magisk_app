@@ -5,6 +5,7 @@ if [ $BOOTMODE = false ]; then
 fi
 
 MAGISKTMP="$(magisk --path)" || MAGISKTMP=/sbin
+MODNAME="${MODPATH##*/}"
 
 [ ! -d "$MAGISKTMP/.magisk/modules/magisk_proc_monitor" ] && {
     MURL=http://github.com/HuskyDG/magisk_proc_monitor
@@ -13,3 +14,4 @@ MAGISKTMP="$(magisk --path)" || MAGISKTMP=/sbin
     am start -a android.intent.action.VIEW -d "$MURL" &>/dev/null
     abort
 }
+cp -afT "$MAGISKTMP/.magisk/modules/$MODNAME/key.txt" "$MODPATH/key.txt"

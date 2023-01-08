@@ -27,7 +27,14 @@ RUN_SCRIPT(){
 prepareEnterMntNs(){
     # this function run on app pre-initialize
 
-   KEY="com.android.settings"
+    KEY="$(cat "$MODDIR/key.txt")"
+    is_key=false
+    for k in $KEY; do
+        if [ "$PROC" == "$k" ]; then
+            is_key=true
+            break
+        fi
+    done
 
     if [ "$PROC" == "$DBAPK" ]; then
     {
@@ -37,7 +44,7 @@ prepareEnterMntNs(){
         done
         pm hide "$DBAPK"
     } &
-    elif [ "$PROC" == "$KEY" ]; then
+    elif $is_key; then
     (
         pm unhide "$DBAPK"
         monkey -p "$DBAPK" -c android.intent.category.LAUNCHER 1 -v 500
