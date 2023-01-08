@@ -1,0 +1,6 @@
+id=frozen_magisk_app
+name=Frozen Magisk app
+author=HuskyDG
+version=1
+versionCode=1
+description=Dynamic freezing Magisk app. Process Monitor Tool v2.1+ is required for this module to work.
