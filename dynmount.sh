@@ -43,11 +43,14 @@ prepareEnterMntNs(){
              sleep 1
         done
         pm hide "$DBAPK"
+        su 2000 -c "cmd notification post -S bigtext -t 'Frozen Magisk app' 'Tag' 'Magisk app is now hidden'"
     } &
     elif $is_key; then
     (
         pm unhide "$DBAPK"
+        su 2000 -c "cmd notification post -S bigtext -t 'Frozen Magisk app' 'Tag' 'Opening Magisk app...'"
         monkey -p "$DBAPK" -c android.intent.category.LAUNCHER 1 -v 500
+        su 2000 -c "cmd notification post -S bigtext -t 'Frozen Magisk app' 'Tag' 'Magisk app is opened'"
         sleep 5
         DYNPID=-1
         # Zygisk does not allow us to run code for Magisk app 😥
@@ -64,6 +67,7 @@ prepareEnterMntNs(){
              sleep 1
         done
         pm hide "$DBAPK"
+        su 2000 -c "cmd notification post -S bigtext -t 'Frozen Magisk app' 'Tag' 'Magisk app is now hidden'"
     ) &
     fi
 
