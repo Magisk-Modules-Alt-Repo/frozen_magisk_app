@@ -10,3 +10,6 @@ Automatically freeze Magisk app and open automatically when you open key app (Se
 
 ### Key processes list
 - The default key process to open Magisk app is `com.android.settings` (Settings app), you can change the key process in `key.txt`
+
+### Uninstall
+- Before uninstalling this module, please un-hide Magisk app to original package first!!!
