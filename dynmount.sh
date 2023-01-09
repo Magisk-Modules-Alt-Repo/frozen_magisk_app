@@ -49,9 +49,11 @@ prepareEnterMntNs(){
     (
         pm unhide "$DBAPK"
         su 2000 -c "cmd notification post -S bigtext -t 'Frozen Magisk app' 'Tag' 'Opening Magisk app...'"
+        rotation_mode="$(content query --uri content://settings/system --projection name:value --where "name='accelerometer_rotation'")"
         monkey -p "$DBAPK" -c android.intent.category.LAUNCHER 1 -v 500
         su 2000 -c "cmd notification post -S bigtext -t 'Frozen Magisk app' 'Tag' 'Magisk app is opened'"
-        sleep 5
+        content insert --uri content://settings/system --bind name:s:accelerometer_rotation --bind value:i:"${rotation_mode##*value=}"
+        sleep 2
         DYNPID=-1
         # Zygisk does not allow us to run code for Magisk app 😥
         # So we catch Magisk app through key app
